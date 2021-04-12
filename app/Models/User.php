@@ -19,5 +19,10 @@ class User extends Model
 
     const UPDATED_AT = 'updatedAt';
 
+    public function userPhones()
+    {
+        return $this->hasMany(UserPhone::class);
+    }
+
 
 }
