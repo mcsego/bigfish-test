@@ -41,6 +41,9 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+
+$app->register(Rebing\GraphQL\GraphQLLumenServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
