@@ -8,7 +8,7 @@ use App\Models\User as UserModel;
 
 class User
 {
-    public function getALlUser()
+    public function getAllUser()
     {
         return UserModel::all();
     }

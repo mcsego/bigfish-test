@@ -102,16 +102,27 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
-                // ExampleQuery::class,
+                App\GraphQL\Queries\UserQuery::class
             ],
             'mutation' => [
                 // ExampleMutation::class,
             ],
             'types' => [
-                // ExampleType::class,
+                App\GraphQL\Types\UserType::class,
+                App\GraphQL\Types\UserPhoneType::class
             ],
             'middleware' => [],
             'method' => ['get', 'post'],
+        ],
+        'user' => [
+            'query' => [
+            ],
+            'mutation' => [
+
+            ],
+            'types' => [
+
+            ]
         ],
     ],
 

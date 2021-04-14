@@ -14,4 +14,5 @@ class UserPhone extends Model
     protected $primaryKey = 'id';
 
     public $incrementing = true;
+
 }

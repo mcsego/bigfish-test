@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function list()
     {
-        $users = $this->userRepo->getALlUser();
+        $users = $this->userRepo->getAllUser();
 
         return view('user.list', [
             'users' => $users
