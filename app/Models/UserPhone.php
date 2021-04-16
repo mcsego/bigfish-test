@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserPhone extends Model
 {
@@ -14,4 +15,11 @@ class UserPhone extends Model
     protected $primaryKey = 'id';
 
     public $incrementing = true;
+
+    public $timestamps = false;
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

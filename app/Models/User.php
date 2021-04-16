@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Model
 {
@@ -19,10 +20,8 @@ class User extends Model
 
     const UPDATED_AT = 'updatedAt';
 
-    public function userPhones()
+    public function userPhone(): HasOne
     {
-        return $this->hasMany(UserPhone::class);
+        return $this->hasOne(UserPhone::class);
     }
-
-
 }
