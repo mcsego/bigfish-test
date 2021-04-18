@@ -14,7 +14,7 @@ enum QueryUsersOrderByColumn {
     EMAIL @enum(value: "email")
     DATE_OF_BIRTH @enum(value: "dateOfBirth")
     IS_ACTIVE @enum(value: "isActive")
-    USER_PHONE @enum(value: "userPhone")
+    USER_PHONE @enum(value: "userPhone.phoneNumber")
 }
 
 enum SortOrder {
@@ -23,7 +23,7 @@ enum SortOrder {
 }
 
 type Query {
-    users(orderBy: _ @orderBy(columns: ["name", "email", "isActive", "dateOfBirth"])): [User!]! @paginate(defaultCount: 10)
+    users(orderBy: _ @orderBy(columns: ["name", "email", "isActive", "dateOfBirth", "userPhone"])): [User!]! @paginate(defaultCount: 10)
 }
 
 type Mutation {
@@ -38,7 +38,7 @@ input CreateUserInput {
     email: String!,
     dateOfBirth: Date!,
     isActive: Int!
-    userPhone: UpdateUserPhoneBelongsTo
+    userPhone: UpdateUserPhoneBelongsTo!
 }
 
 input UpdateUserInput {
@@ -51,7 +51,7 @@ input UpdateUserInput {
 }
 
 input UpdateUserPhoneBelongsTo {
-    create: CreateUserPhoneInput
+    create: CreateUserPhoneInput!
     update: UpdateUserPhoneInput
 }
 
@@ -60,7 +60,6 @@ input CreateUserPhoneInput {
 }
 
 input UpdateUserPhoneInput {
-    id: ID!
     user_id: Int!
     phoneNumber: String
 }
