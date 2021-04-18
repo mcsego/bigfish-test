@@ -13,8 +13,8 @@ enum QueryUsersOrderByColumn {
     NAME @enum(value: "name")
     EMAIL @enum(value: "email")
     DATE_OF_BIRTH @enum(value: "dateOfBirth")
-    IS_ACTIVE @enum(value: "userPhone")
-    USER_PHONE @enum(value: "isActive")
+    IS_ACTIVE @enum(value: "isActive")
+    USER_PHONE @enum(value: "userPhone")
 }
 
 enum SortOrder {
