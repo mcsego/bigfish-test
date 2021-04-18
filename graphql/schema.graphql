@@ -9,12 +9,22 @@ input QueryUsersOrderByOrderByClause {
     order: SortOrder!
 }
 
+input QueryUserPhonesOrderByOrderByClause {
+    column: QueryUserPhonesOrderByColumn!
+    order: SortOrder!
+}
+
 enum QueryUsersOrderByColumn {
     NAME @enum(value: "name")
     EMAIL @enum(value: "email")
     DATE_OF_BIRTH @enum(value: "dateOfBirth")
     IS_ACTIVE @enum(value: "isActive")
     USER_PHONE @enum(value: "userPhone.phoneNumber")
+}
+
+enum QueryUserPhonesOrderByColumn {
+    PHONE_NUMBER @enum(value: "name")
+    USER_ID @enum(value: "userId")
 }
 
 enum SortOrder {
@@ -24,6 +34,7 @@ enum SortOrder {
 
 type Query {
     users(orderBy: _ @orderBy(columns: ["name", "email", "isActive", "dateOfBirth", "userPhone"])): [User!]! @paginate(defaultCount: 10)
+    usersPhone(orderBy: _ @orderBy(columns: ["phoneNumber", "userId"])): UserPhone! @paginate(defaultCount: 10)
 }
 
 type Mutation {
