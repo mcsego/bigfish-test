@@ -33,7 +33,7 @@ enum SortOrder {
 }
 
 type Query {
-    users(orderBy: _ @orderBy(columns: ["name", "email", "isActive", "dateOfBirth", "userPhone"])): [User!]! @paginate(defaultCount: 10)
+    users(orderBy: _ @orderBy(columns: ["name", "email", "isActive", "dateOfBirth", "userPhone"])): [User!]! @paginate(defaultCount: 10000)
     usersPhone(orderBy: _ @orderBy(columns: ["phoneNumber", "userId"])): UserPhone! @paginate(defaultCount: 10)
 }
 
@@ -43,15 +43,6 @@ type Mutation {
      deleteUser(id: ID!): User @delete
 
 }
-
-input CreateUserInput {
-    name: String!,
-    email: String!,
-    dateOfBirth: Date!,
-    isActive: Int!
-    userPhone: UpdateUserPhoneBelongsTo!
-}
-
 input UpdateUserInput {
     id: ID!
     name: String,
@@ -60,10 +51,22 @@ input UpdateUserInput {
     isActive: Int
     userPhone: UpdateUserPhoneBelongsTo
 }
+input CreateUserInput {
+    name: String!,
+    email: String!,
+    dateOfBirth: Date!,
+    isActive: Int!
+    userPhone: CreateUserPhoneBelongsTo!
+}
+
+
 
 input UpdateUserPhoneBelongsTo {
-    create: CreateUserPhoneInput!
     update: UpdateUserPhoneInput
+}
+
+input CreateUserPhoneBelongsTo {
+    create: CreateUserPhoneInput!
 }
 
 input CreateUserPhoneInput {
@@ -71,7 +74,7 @@ input CreateUserPhoneInput {
 }
 
 input UpdateUserPhoneInput {
-    user_id: Int!
+    id: Int!
     phoneNumber: String
 }
 

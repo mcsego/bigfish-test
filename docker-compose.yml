@@ -2,7 +2,7 @@ version: '3'
 services:
     laravel.test:
         build:
-            context: ./
+            context: _docker_build
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
@@ -18,8 +18,6 @@ services:
             - sail
         depends_on:
             - pgsql
-            - redis
-            - selenium
       #PostgreSQL Service
     pgsql:
         image: 'postgres:12.0-alpine'
@@ -35,28 +33,9 @@ services:
              - '5432:5432'
         networks:
              - sail
-
-    redis:
-        image: 'redis:alpine'
-        ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
-        volumes:
-            - 'sailredis:/data'
-        networks:
-            - sail
-        healthcheck:
-          test: ["CMD", "redis-cli", "ping"]
-    selenium:
-       image: 'selenium/standalone-chrome'
-       volumes:
-            - '/dev/shm:/dev/shm'
-       networks:
-           - sail
 networks:
     sail:
         driver: bridge
 volumes:
     sailpgsql:
-        driver: local
-    sailredis:
         driver: local
