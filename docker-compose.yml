@@ -2,7 +2,7 @@ version: '3'
 services:
     laravel.test:
         build:
-            context: ./
+            context: _docker_build
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
@@ -18,15 +18,14 @@ services:
             - sail
         depends_on:
             - pgsql
-            - redis
-            - selenium
       #PostgreSQL Service
     pgsql:
         image: 'postgres:12.0-alpine'
         container_name: laravel-pgsql
         working_dir: '/data/pgsql'
         volumes:
-             - './postgresql-data:/var/lib/postgresql/data'
+              - './docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d'
+              - './postgresql-data:/var/lib/postgresql/data'
         environment:
               POSTGRES_USER: '${DB_USERNAME}'
               POSTGRES_PASSWORD: '${DB_PASSWORD}'
@@ -35,28 +34,9 @@ services:
              - '5432:5432'
         networks:
              - sail
-
-    redis:
-        image: 'redis:alpine'
-        ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
-        volumes:
-            - 'sailredis:/data'
-        networks:
-            - sail
-        healthcheck:
-          test: ["CMD", "redis-cli", "ping"]
-    selenium:
-       image: 'selenium/standalone-chrome'
-       volumes:
-            - '/dev/shm:/dev/shm'
-       networks:
-           - sail
 networks:
     sail:
         driver: bridge
 volumes:
     sailpgsql:
-        driver: local
-    sailredis:
         driver: local

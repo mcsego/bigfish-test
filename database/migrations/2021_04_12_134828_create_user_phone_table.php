@@ -15,9 +15,9 @@ class CreateUserPhoneTable extends Migration
     public function up()
     {
         Schema::create('user_phone', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->foreignIdFor(User::class, 'user_id')->nullable(false);
-            $table->string('phoneNumber');
+            $table->id();
+            $table->foreignId('user_id')->constrained('user')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('phoneNumber')->unique();
         });
     }
 
